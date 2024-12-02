@@ -7,26 +7,20 @@ function App() {
 
   const handleAddHabit = (habitName) => {
     // TODO: write code to add a new habit here
-    const newHabit = {
-      id: Date.now(),
-      name: habitName,
-      completed: false
-    };
-    setHabits([...habits, newHabit]);
+    setHabits((prevHabits) => [...prevHabits, habitName]);
   };
 
   const handleToggleHabit = (id) => {
     // TODO: write code to toggle a habit's status
-    setHabits(
-      habits.map((habit) =>
-        habit.id === id ? { ...habit, completed: !habit.completed } : habit
-      )
+    setHabits((prevHabits) => prevHabits.map((habitName) =>  
+    habitName.id === id ? { ...habitName, completed: !habitName.completed } : habitName 
+    )
     );
   };
 
   const handleDeleteHabit = (id) => {
     // TODO: write code to delete a habit
-    setHabits(habits.filter((habit) => habit.id !== id));
+    setHabits((prevHabits) => prevHabits.filter((habit) => habit.id !== id)); 
   };
 
   return (
@@ -35,12 +29,12 @@ function App() {
       {/*TODO: add a form to add a new habit*/}
       <AddHabitForm onAddHabit={handleAddHabit} />
       {/*TODO: add a list of habits*/}
-      <HabitList
-        habits={habits}
-        onToggleHabit={handleToggleHabit}
-        onDeleteHabit={handleDeleteHabit}
-      />
-    </div>
+      <HabitList 
+      habits={habits} 
+      onDeleteHabit={handleDeleteHabit} 
+      onToggleHabit={handleToggleHabit} 
+      /> 
+    </div> 
   );
 }
 
